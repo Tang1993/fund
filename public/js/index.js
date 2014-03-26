@@ -152,4 +152,17 @@ controllerModule.controller("LogRegController", function($scope, User, $http) {
 		}
 	};
 });
+controllerModule.controller("newController",function($scope){
+	$scope.new = {
+		basicInfo:{
+			isActive:true
+		},
+		richInfo:{
+			isActive:false
+		},
+		teamIntro:{
+			isActive:false
+		}
+	};
+});
 
