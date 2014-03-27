@@ -4,3 +4,33 @@ body{
 #regForm{
 	margin-top: 20px;
 }
+form{
+	margin-top:20px;
+}
+.andy-remove-cross{
+	padding:0px 0px 1px 5px;	
+}
+.andy-remove-cross::before{
+	content:'X';
+}
+.andy-tags-ul{
+	padding-left:0;
+	text-decoration: none;
+}
+.andy-tags-ul li{
+	display: inline-block;
+	margin-right: 6px;
+}
+.andy-add-tag{
+	padding-top:5px;
+	cursor: pointer;
+}
+.andy-add-tag-text{
+	padding-left: 4px;
+}
+.andy-add-tag-input{
+	padding-left: 5px;
+	outline: none;
+	border:0;
+	border-bottom: 1px solid lightblue;
+}

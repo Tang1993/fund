@@ -1,4 +1,17 @@
 var controllerModule = angular.module("index", ['ngRoute', 'Service']);
+controllerModule.directive('ngEnter', function() {
+	return function(scope, element, attrs) {
+		element.bind("keydown keypress", function(event) {
+			if (event.which === 13) {
+				scope.$apply(function() {
+					scope.$eval(attrs.ngEnter);
+				});
+
+				event.preventDefault();
+			}
+		});
+	};
+});
 
 controllerModule.config(function($httpProvider) {
 //	//Enable cross domain calls
@@ -88,7 +101,6 @@ controllerModule.controller("PageController", function($scope) {
 	};
 });
 
-
 controllerModule.controller("LogRegController", function($scope, User, $http) {
 	//All variable and functions are defined under the namespace "user" 
 	$scope.user = {
@@ -108,13 +120,13 @@ controllerModule.controller("LogRegController", function($scope, User, $http) {
 		}
 	};
 	$scope.user.submit = function() {
-		($scope.reglog.log.isActive)?$scope.user.log():$scope.user.reg();
+		($scope.reglog.log.isActive) ? $scope.user.log() : $scope.user.reg();
 	};
-	$scope.user.log = function(){
+	$scope.user.log = function() {
 		var userData = {
-			'islog':"login",
-			'email':$scope.user.email.input,
-			'passwd':$scope.user.passwd.input
+			'islog': "login",
+			'email': $scope.user.email.input,
+			'passwd': $scope.user.passwd.input
 		};
 		User.log(userData);
 	};
@@ -152,16 +164,33 @@ controllerModule.controller("LogRegController", function($scope, User, $http) {
 		}
 	};
 });
-controllerModule.controller("newController",function($scope){
+
+controllerModule.controller("newController", function($scope) {
 	$scope.new = {
-		basicInfo:{
-			isActive:true
+		basicInfo: {
+			isActive: true
 		},
-		richInfo:{
-			isActive:false
+		richInfo: {
+			isActive: false
 		},
-		teamIntro:{
-			isActive:false
+		teamIntro: {
+			isActive: false
+		},
+		tag: {
+			tags: [],
+			input:"",
+			addTagTitle:"添加标签",
+			addTag: function() {
+				$scope.new.tag.tags.push($scope.new.tag.input);
+				$scope.new.tag.input = "";
+			},
+			removeTag:function(tag){
+				alert(tag);	
+			},
+			focus:function(){
+				$scope.new.tag.addTagTitle = "输入标签并回车";
+				$("#addTagInput").focus();
+			}
 		}
 	};
 });
